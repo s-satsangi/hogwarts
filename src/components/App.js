@@ -19,9 +19,11 @@ class App extends Component {
     }
   }
   alphaPig = () => {
-    let pigs = hogs
-    hogs.sort(hogs.name)
-    console.log(hogs.sort(hogs.name))
+ 
+    this.setState({pigs: hogs.sort((a,b)=>{ return a["name"].localeCompare(b["name"])})})
+    console.log(hogs.sort((a,b)=>{ return a["name"].localeCompare(b["name"])}))
+    
+        
   }
   render() {
     return (
@@ -29,7 +31,7 @@ class App extends Component {
         <Nav />
         
         <button onClick={this.alphaPig}>Sort By Name</button>
-        {hogs.map(hog => <SinglePig hog={hog} />)}
+        {this.state.pigs.map(hog => <SinglePig hog={hog} />)}
         
       </div>
     );
