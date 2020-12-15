@@ -2,40 +2,46 @@ import React, { Component } from 'react'
 const style1 = 'ui card'
 
 export default class SinglePig extends Component {
-    constructor(){
+    constructor(props){
         super()
-        this.props = {
+        this.state = {
             
-            front: <h2 className='header'>{this.props.hog.name}</h2>,
-            back:  <div className='body'>
-                {this.props.hog.specialty}
-                {this.props.hog.greased}
-                {this.props.hog.weight}
-                {this.props.hog['highest medal achieved']}
+            front: <div className="pigTile ui card"><h2 className='header'>{props.hog.name}</h2> 
+                    <div className='image' ><img className='image' src={require(`../hog-imgs/${props.hog.name.toLowerCase().replace(/\s/g,'_')}.jpg`)} alt="this is an alt prop"/></div></div>,
+            cardBack:  <div className='body'>
+                {props.hog.specialty}
+                {props.hog.greased}
+                {props.hog.weight}
+                {props.hog['highest medal achieved']}
                 
-            </div>
+            </div>,
+            flipped: false
 
         }
     }
-
+    
+    frontCard = () => 
+          <div className="pigTile ui card"><h2 className='header'>{this.props.hog.name}</h2> 
+                    <div className='image' ><img className='image' src={require(`../hog-imgs/${this.props.hog.name.toLowerCase().replace(/\s/g,'_')}.jpg`)} alt="this is an alt prop"/></div></div>
+  
+    
+    backCard = () =>  <div className='pigTile ui card'>
+       <div className="header"> {this.props.hog.specialty}</div>
+       <div className="header"> {this.props.hog.greased}</div>
+       <div className="header"> {this.props.hog.weight}</div>
+       <div className="header"> {this.props.hog['highest medal achieved']}
+        </div>
+    </div> 
+    
     render() {
+        let inCard = this.state.front
         return (
-            <div onclick={this.state.hog.back} className=" ui move right reveal ui card ui eight wide column">
-                {/* <div className='visible content'> */}
-                <h2 className='header'>{this.props.hog.name}</h2>
-                
-                <div className='image' ><img src={require(`../hog-imgs/${this.props.hog.name.toLowerCase().replace(/\s/g,'_')}.jpg`)} alt="this is an alt prop"/></div>
+            <div onClick={()=>{return this.setState({flipped: !this.state.flipped})}} className="ui eight wide column">
+                {this.state.flipped ? this.backCard() : this.frontCard()}               
                 </div>
                 
         )
     }
 }
 
-{/* <div class="ui move right reveal">
-  <div class="visible content">
-    <img src="/images/wireframe/square-image.png" class="ui small image">
-  </div>
-  <div class="hidden content">
-    <img src="/images/avatar/large/jenny.jpg" class="ui small image">
-  </div>
-</div> */}
+<div className = "pigTile ui eight wide column ui card"></div>
