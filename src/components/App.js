@@ -6,7 +6,10 @@ import hogs from "../porkers_data";
 // import PigPen from "./PigPen"
 import SinglePig from "./SinglePig"
 
+
 class App extends Component {
+
+
   
   //stick them pigs in state
   constructor(){
@@ -17,7 +20,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App ui grid container">
+      <div className="App ui grid container ui eight wide column">
         <Nav />
         {hogs.map(hog => <SinglePig hog={hog} />)}
         
